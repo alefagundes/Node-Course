@@ -179,17 +179,32 @@ function widthdraw(){
                     message: 'Informe o valor a ser sacado:'
                 }
             ]).then(answer => {
+            const amount = answer['value']
 
-            const accountData = getAccount(accountName)
-            accountData.balance -= answer['value']
-            fs.writeFileSync(`accounts/${accountName}.json`, JSON.stringify(accountData), function(err){
-                console.log(err)
-            })
-            console.log(chalk.bgBlue.white(`O valor de R$${answer['value']} foi subtraido da conta.`))
-            operation()
+            removeAmount(accountName, amount)
 
             }).catch((err) => console.log(err))
         }
     })
     .catch((err) => console.log(err))
+}
+
+function removeAmount(accountName, amount){
+    const accountData = getAccount(accountName)
+    if(!amount){
+        console.log(chalk.bgRed.white('Ocorreu um erro tente novamente mais tarde'))
+        return widthdraw()
+    }
+    else if(accountData.balance < amount){
+        console.log(chalk.bgRed.white('Valor indisponivel!'))
+        return widthdraw()
+    }
+
+    accountData.balance = parseFloat(accountData.balance) - parseFloat(amount)
+    fs.writeFileSync(`accounts/${accountName}.json`, JSON.stringify(accountData), function(err){
+        console.log(err)
+    })
+    console.log(chalk.bgBlue.white(`O valor de R$${amount} foi subtraido da conta.`))
+
+    operation()
 }
