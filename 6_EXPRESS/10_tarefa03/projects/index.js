@@ -1,0 +1,17 @@
+const express = require('express')
+
+const router = express.Router()
+const path = require('path')
+
+const basePath = path.join(__dirname, '../templates')
+
+
+router.get('/', (req, res) => {
+    res.status(200).sendFile(`${basePath}/index.html`)
+})
+
+router.get('/:id', (req, res) => {
+    res.status(200).sendFile(`${basePath}/project.html`)
+})
+
+module.exports = router
