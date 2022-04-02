@@ -34,18 +34,15 @@ app.use(express.json())
      const name = req.body.name
      const ocuppation = req.body.ocuppation
      let newsletter = req.body.newsletter
-
+     
      if(newsletter === 'on'){
          newsletter = true
      }else{
          newsletter = false
      }
      await User.create({name, ocuppation, newsletter})
-     
-     console.log(req.body)
 
      res.redirect('/')
-
  })
 
 app.get('/users/:id', async(req, res) => {
