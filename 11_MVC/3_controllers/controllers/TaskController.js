@@ -1,7 +1,7 @@
 const Task = require('../models/Task')
 
 module.exports = class TaskController {
-    static create(req, res) {
+    static createTasks(req, res) {
     res.render('tasks/create')
     }
 }
