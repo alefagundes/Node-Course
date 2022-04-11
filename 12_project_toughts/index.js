@@ -12,6 +12,9 @@ const User = require('./models/User')
 
 //import routes
 const toughtsRoutes = require('./routes/toughtsRoutes')
+const authRoutes = require('./routes/authRoutes')
+
+//import controllers
 const ToughtControllers = require('./controllers/ToughtController')
 
 //config engine handlebars
@@ -60,6 +63,7 @@ app.use((req, res, next) => {
 
 //Routes
 app.use('/toughts', toughtsRoutes)
+app.use('/', authRoutes)
 
 //import controller
 app.get('/', ToughtControllers.showToughts)
