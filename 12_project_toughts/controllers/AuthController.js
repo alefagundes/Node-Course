@@ -18,9 +18,35 @@ module.exports = class AuthController {
         if(password!= confirmpassword){
             req.flash('message', 'As senhas nao conferem, tente novamente!')
             res.render('auth/register')
-
             return
         }
+        //check if user exists
+        const checkIfUserExist = await User.findOne({where: {email: email}})
+        if(checkIfUserExist){
+            req.flash('message', 'O e-mail ja está em uso!')
+            res.render('auth/register')
+            return
+        }
+        //create a password
+        const salt = bcrypt.genSaltSync(10)
+        const hashedPassword = bcrypt.hashSync(password, salt)
 
+        const user = {
+            name,
+            email,
+            password: hashedPassword
+        }
+        try{
+            const crateuser = await User.create(user)
+            //initialize session
+            req.session.userid = crateuser.id
+
+            req.flash('message', 'Cadastro realizado com sucesso!')
+            req.session.save(() => {
+                res.redirect('/')
+            })
+        }catch(err){
+            console.log(err)
+        }
     }
 }
