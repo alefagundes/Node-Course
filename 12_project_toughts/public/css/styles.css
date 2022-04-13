@@ -140,6 +140,12 @@ form input[type='submit']:hover,
 
 }
 
+.tought-form-container a {
+    color: #fff;
+    text-decoration: none;
+    cursor: pointer;
+}
+
 .tought-form-container:hover{
     color: #fff;
 }
