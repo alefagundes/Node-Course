@@ -33,12 +33,26 @@ module.exports = class TaughtsController {
         try{
         await Tought.create(tought)
 
-        req.flash('message', 'Pensameto criado com suceesso!')
-        req.session.save()
-        res.redirect('/toughts/dashboard')
-        
+            req.flash('message', 'Pensameto criado com suceesso!')
+            req.session.save(() =>{
+                res.redirect('/toughts/dashboard')
+            })
         } catch(err){
             console.log('Aconteceu um erro: ' + err)
+        }
+    }
+
+    static async removeTought(req, res){
+        const id= req.body.id
+        const UserId = req.session.userid
+        try {
+            await Tought.destroy({where: {id: id, UserId: UserId}})
+            req.flash('message', 'Pensameto removido com suceesso!')
+            req.session.save(() =>{
+                res.redirect('/toughts/dashboard')
+            })
+        }catch(err){
+            console.log(err)
         }
     }
 }
