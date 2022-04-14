@@ -1,5 +1,24 @@
 <div class="home-header">
-    <h1>Todos os Pesnamentos!</h1>
+    <h1>Todos os Pesamentos!</h1>
+    <form action="">
+        <input type="text" name="search" placeholder="Está buscando por algo?">
+        <input type="submit" value="Buscar" class="btn">
+    </form>
+    <div class="order-container">
+         <span>Ordenar por:</span>
+            <form action="/" method="get">  
+                <input type="hidden" name="search" value="{{this.search}}">
+                <input type="hidden" name="order" value="new">
+                <button type="submit"><i class="bi bi-arrow-up"></i></button>
+            </form>
+            <form action="/" method="get">
+                <input type="hidden" name="search" value="{{this.search}}">
+                <input type="hidden" name="order" value="old">
+                <button type="submit"><i class="bi bi-arrow-down"></i></button>
+            </form>
+            <a href="/">Limpar</a>
+</div>
+    </div>
     <div class="toughts-container">
         {{#each toughts}}
         <figure>
@@ -10,4 +29,3 @@
         </figure>
         {{/each}}
     </div>
-</div>
