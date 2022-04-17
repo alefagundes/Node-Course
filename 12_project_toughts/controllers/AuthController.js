@@ -11,14 +11,14 @@ module.exports = class AuthController {
             //check user exists
             const user = await User.findOne({where: {email: email}})
             if(!user){
-                req.flash('message', 'Credenciais incorretas!')
+                req.flash('message', 'E-mail/Senha incorretas!')
                 res.render('auth/login')
                 return
             }
             //check password
             const passwordMatch = bcrypt.compareSync(password, user.password)
             if(!passwordMatch){
-                req.flash('message', 'Credenciais incorretas!')
+                req.flash('message', 'E-mail/Senha incorretas!')
                 res.render('auth/login')
                 return
             }
