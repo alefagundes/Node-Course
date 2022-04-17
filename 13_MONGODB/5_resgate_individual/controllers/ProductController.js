@@ -27,7 +27,6 @@ module.exports = class ProductController {
       const id = req.params.id
       const product = await Product.getProductById(id)
       console.log(product)
-
       res.render('products/product', {product})
     }
 }

@@ -103,12 +103,14 @@ form input[type="submit"],
     color: black;
 }
 
-.product-page img {
+.product-page img{
     max-width: 250px;
     margin-bottom: 1em;
 }
 
+
 .product-page p{
     margin-bottom: 1em;
 }
+
 
