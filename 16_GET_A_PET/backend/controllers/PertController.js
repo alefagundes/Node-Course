@@ -67,4 +67,30 @@ module.exports = class PertController{
             res.status(500).json({message: `Erro interno: ${err}`})
         }
     }
+
+    static async getAll(req, res){
+        const pets = await Pet.find().sort('-createdAt')
+        res.status(200).json({pets: pets})
+    }
+
+    static async getAllUserPets(req, res){
+        const token = getToken(req)
+        const user = await getUserByToken(token)
+
+        const pets = await Pet.find({'user._id': user._id}).sort('-createdAt')
+        
+        res.status(200).json({pets})
+    }
+
+    static async getAllUserAdoptions(req, res) {
+        // get user
+        const token = getToken(req)
+        const user = await getUserByToken(token)
+    
+        const pets = await Pet.find({ 'adopter._id': user._id })
+    
+        res.status(200).json({
+          pets,
+        })
+      }
 }
