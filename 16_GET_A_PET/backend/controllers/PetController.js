@@ -3,8 +3,9 @@ const Pet = require('../models/Pet')
 //helper
 const getToken = require('../helpers/get-token')
 const getUserByToken = require('../helpers/get-user-by-token')
+const ObjectId = require('mongoose').Types.ObjectId
 
-module.exports = class PertController{
+module.exports = class PetController{
 
     //create a pet
     static async create(req, res){
@@ -92,5 +93,47 @@ module.exports = class PertController{
         res.status(200).json({
           pets,
         })
+      }
+
+      static async getPetById(req, res){
+          const id = req.params.id
+
+          if(!ObjectId.isValid(id)){
+             res.status(422).json({message: 'ID invalido!'})
+             return
+          }
+          //get pet
+          const pet = await Pet.findOne({_id: id})
+
+          if(!pet){
+              res.status(404).json({message: 'Pet nao encontrado!'})
+          }
+          res.status(200).json({pet: pet})
+      }
+
+      static async removePetById(req, res){
+          const id = req.params.id
+
+          //check if id is valid
+          if(!ObjectId.isValid(id)){
+              res.status(422).json({message: 'ID invalid!'})
+              return
+          }
+          //get a pet
+          const pet = await Pet.findOne({_id: id})
+
+          if(!pet){
+            res.status(404).json({message: 'Pet nao encontrado!'})
+        }
+          //check if logged in user registered the pet
+          const token = getToken(req)
+          const user = await getUserByToken(token)
+          
+          if(pet.user._id.toString() !== user._id.toString()){
+              res.status(422).json({message: 'Hove um problema em processar sua solicitação, tente novamente mais tarde!'})
+          }
+          await Pet.findByIdAndRemove(id)
+          
+          res.status(200).json({message: 'Pet removido com sucesso!'})
       }
 }
