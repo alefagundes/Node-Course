@@ -13,6 +13,9 @@ router.get('/mypets', veryfyToken, PetController.getAllUserPets)
 router.get('/myadoptions', veryfyToken, PetController.getAllUserAdoptions)
 router.get('/:id', PetController.getPetById)
 router.delete('/:id', veryfyToken, PetController.removePetById)
+router.patch('/:id', veryfyToken, imageUpload.array('images'), PetController.updatePet)
+router.patch('/schedule/:id', veryfyToken, PetController.schedule)
+router.patch('/conclude/:id', veryfyToken, PetController.concludeAdoption)
 
 
 module.exports = router
