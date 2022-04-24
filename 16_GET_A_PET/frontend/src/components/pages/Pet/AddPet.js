@@ -8,7 +8,7 @@ import PetForm from '../../form/PetForm'
 import useFlashMessage from '../../../hooks/useFlashMessage'
 
 function AddPet() {
-    const token = useState(localStorage.getItem('token') || '')
+    const [token] = useState(localStorage.getItem('token') || '')
     const { setFlashMessage } = useFlashMessage()
     const history = useHistory()
 
@@ -28,7 +28,7 @@ function AddPet() {
         })
         const data = await api
             .post('/pets/create', formData, {
-                Authorization: `Bearer ${JSON.stringify(token)}`,
+                Authorization: `Bearer ${JSON.parse(token)}`,
                 'Content-Type': 'multipart/form-data',
             })
             .then((response) => {
