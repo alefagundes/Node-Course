@@ -1,11 +1,11 @@
-.form_container{
+.form_container {
     max-width: 300px;
     margin: 0 auto;
     background-color: #fff;
     border-radius: 15px;
 }
 
-.form_container input[type='submit']{
+.form_container input[type='submit'] {
     border-radius: 8px;
     background-color: #25b456;
     color: #fff;
@@ -18,8 +18,8 @@
     font-weight: bold;
 }
 
-.form_container input[type='submit']:hover{
-   background-color: #1c8a42;
+.form_container input[type='submit']:hover {
+    background-color: #1c8a42;
 }
 
 .form_container p {
@@ -27,6 +27,19 @@
 }
 
 .form_container a {
-color: #16479d;
-font-weight: bold;
+    color: #16479d;
+    font-weight: bold;
+}
+
+/*form pets*/
+.preview_pet_images {
+    display: flex;
+    justify-content: center;
+    margin: 1em;
+}
+
+.preview_pet_images img {
+    width: 100px;
+    height: 100px;
+    margin-left: 1em;
 }
