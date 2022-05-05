@@ -1,0 +1,13 @@
+{
+    "name": "17_npm_advanced",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "start": "node index.js"
+    },
+    "keywords": [],
+    "author": "Alessandro <alesandrofagundes00@hotmail.com>",
+    "license": "MIT"
+}
